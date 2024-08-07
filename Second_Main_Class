@@ -1,0 +1,63 @@
+package algonquin.cst2335.project;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class MainActivityTwo extends AppCompatActivity {
+    String [] names={"ZOMBIE","ALL OF US ARE DEAD","TRAIN TO BUSAN",
+            "PICKACHU","MISSION MANGAL","KOI MILL GYA","MAHABHARAT","12th FAIL","DASHING CM BHARAT","SITA RAMA,"};
+    int [] img={R.drawable.zombie, R.drawable.all, R.drawable.train, R.drawable.pikachu,
+            R.drawable.mission, R.drawable.mill,R.drawable.mahabharat,R.drawable.fail, R.drawable.bharat, R.drawable.ramam};
+    RecyclerView recyclerview_two;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.movie_page);
+
+        recyclerview_two=(RecyclerView) findViewById(R.id.recyclerview_two);
+
+        MyAdaptor myAdaptor=new MyAdaptor(img,names);
+        recyclerview_two.setLayoutManager(new LinearLayoutManager(this));
+        recyclerview_two.setAdapter(myAdaptor);
+        // Set up the toolbar
+        Toolbar toolbar1 = findViewById(R.id.toolbar1);
+        setSupportActionBar(toolbar1);
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toobar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.notify) {
+            Toast.makeText(this, "Notification clicked", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.view_item) {
+            Toast.makeText(this, "View people", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.account) {
+            // Navigate to the LoginPage activity
+            Intent intent = new Intent(this, LoginPage.class);
+            startActivity(intent);
+        }
+        return true;
+    }
+
+    }
+
